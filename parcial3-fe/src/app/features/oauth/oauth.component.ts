@@ -26,7 +26,7 @@ export class OauthComponent{
       if (user && user.idToken) {
         this.oauthService.verifyToken(user);
       }
-      this.router.navigate(['/inicioEmt']);
+      this.router.navigate(['/eventos']);
     });
   }
 

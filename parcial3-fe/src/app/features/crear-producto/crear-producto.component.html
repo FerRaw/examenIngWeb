@@ -1,18 +1,18 @@
 <div class="container">
-    <h1>Nuevo producto</h1>
+    <h1>Nuevo evento</h1>
   </div>
   <div *ngIf="producto_en_proceso" class="container mt-4">
     <div class="mb-3">
   
       <div class="alert alert-info mt-2" role="alert">
-        Creando producto...
+        Creando evento...
       </div>
     </div>
   </div>
   <div *ngIf="producto_creado" class="container mt-4">
     <div class="mb-3">
       <div class="alert alert-success mt-2" role="alert">
-        Producto creado con éxito.
+        Evento creado con éxito.
       </div>
       <div class="btn" (click)="onButtonVolverClick()">Volver</div>
     </div>
@@ -28,8 +28,8 @@
   </div>
   
   <div *ngIf="!producto_creado && !error_general"  class="container mt-4">
-    <label for="fileInput" class="form-label">Subir Imágenes:</label>
-    <input type="file" id="fileInput" accept="image/*" multiple (change)="onFileSelected($event)" class="form-control">
+    <label for="fileInput" class="form-label">Subir Imágenes: Dale a subir antes de crear el producto!</label>
+    <input type="file" id="fileInput" accept="image/*"W (change)="onFileSelected($event)" class="form-control">
     <button *ngIf="!fotos_subidas" class="btn  mt-2" (click)="onButtonClicked()">Subir imágenes</button>
     <div *ngIf="fotos_subidas" class="alert alert-success mt-2" role="alert">
       ¡Fotos subidas!
@@ -38,14 +38,20 @@
       <br>
   
       <div class="mb-3">
-        <label for="descripcion" class="form-label">Descripción:</label>
-        <textarea id="descripcion" [(ngModel)]="producto.descripcion" name="descripcion" class="form-control"
+        <label for="nombre" class="form-label">Nombre:</label>
+        <textarea id="nombre" [(ngModel)]="evento.nombre" name="nombre" class="form-control"
           required></textarea>
       </div>
   
       <div class="mb-3">
-        <label for="precioSalida" class="form-label">Precio inicial:</label>
-        <input type="number" id="precioSalida" [(ngModel)]="producto.precioSalida" name="precioSalida" class="form-control" required>
+        <label for="timestamp" class="form-label">Fecha:</label>
+        <input type="date" id="timestamp" [(ngModel)]="evento.timestamp" name="timestamp" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="lugar" class="form-label">Lugar</label>
+        <textarea id="lugar" [(ngModel)]="evento.lugar" name="lugar" class="form-control"
+          required></textarea>
       </div>
   
       <div *ngIf="error_empty_field" class="alert alert-danger mt-2" role="alert">

@@ -35,51 +35,20 @@ export class OauthService {
     );
   }
 
-  getLineas(): Observable<any> {
-    return this.http.get('http://localhost:8000/lineas/');
+  getEventos(): Observable<any> {
+    return this.http.get('http://localhost:8000/eventos/');
     //return this.http.get<any>(url);
   }
 
-  getForm1(codLinea: string, sentido: string): Observable<any> {
-    const url = `http://localhost:8000/lineas/${codLinea}/${sentido}/`;
-    console.log(this.http.get<any>(url));
+  getCoordenadas(cadena: string): Observable<any> {
+    const url = `http://localhost:8000/form/${cadena}/`;
     return this.http.get<any>(url);
   }
-
-  getForm2(parada: string): Observable<any> {
-    const url = `http://localhost:8000/paradas/${parada}/`;
-    console.log(this.http.get<any>(url));
-    return this.http.get<any>(url);
-  }
-
-  getProductos(): Observable<any> {
-    return this.http.get('http://localhost:8000/articulos/');
-  }
-
-  getProducto(id: string): Observable<any> {
-    const url = `http://localhost:8000/articulo/${id}/`;
-    return this.http.get<any>(url);
-  }
-
-  getUltimaPuja(id: string): Observable<any> {
-    const url = `http://localhost:8000/pujas/last/${id}/`;
-    return this.http.get<any>(url);
-  }
-
-  getPujas(id: string): Observable<any> {
-    const url = `http://localhost:8000/pujas/producto/${id}/`;
-    return this.http.get<any>(url);
-  }
-
-  crearPuja(puja: any): Observable<any> {
-    const url = `http://localhost/pujas/create/`;
-    return this.http.post<any>(url, puja);
-  }
-
-  createProducto(producto: any): Observable<any> {
-    const url = `http://172.31.26.175:8000/articulos/create/`;
+  createEvento(producto: any): Observable<any> {
+    const url = `http://localhost:8000/eventos/create/`;
+    ///const url = `http://172.31.26.175:8000/evento/create/`;
     return this.http.post<any>(url, producto);
-  }
+  }  
 
   uploadImage(files: File[]): Observable<any> {
     const formData = new FormData();

@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppModule } from '../../app.module';
 import { OauthService } from '../../services/oauth.service';
+import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthService, SocialLoginModule, SocialUser } from '@abacritt/angularx-social-login';
+
 
 @Component({
   selector: 'app-crear-producto',
@@ -29,17 +31,20 @@ export class CrearProductoComponent {
   producto_en_proceso: boolean = false;
   error_general: boolean = false;
 
-  producto = {
-    vendedor: localStorage.getItem('email'),
-    descripcion: '',
-    precioSalida: 0,
-    imagenes: [] as string[],
+  evento = {
+    organizador: localStorage.getItem('email'),
+    nombre: '',
+    timestamp: 0,
+    imagenes:[] as any,
+    lugar: '',
+
   };
 
   constructor(
     private http: HttpClient,
     private oauth: OauthService,
-    private router : Router
+    private router : Router,
+    private authService: SocialAuthService
   ) { }
 
   ngOnInit(): void {
@@ -49,9 +54,8 @@ export class CrearProductoComponent {
   }
 
   onSubmit() {
-    this.producto.precioSalida = Number(this.producto.precioSalida);
-
     // Reiniciar errores
+    console.log(this.evento);
     this.error_empty_field = false;
     this.error_precio = false;
     this.error_fotos = false;
@@ -59,22 +63,10 @@ export class CrearProductoComponent {
     this.error_general = false;
 
     // Get today's date
-    const currentDate = new Date();
-    
-    if (this.producto.descripcion.length == 0) {
-      this.error_empty_field = true;
-    } else if (this.producto.precioSalida <= 0) {
-      this.error_precio = true;
-    }
-    else if (!this.fotos_subidas) {
-      this.error_fotos = true;
-    }
-
-    else {
-      console.log(this.producto);
+      console.log(this.evento);
       this.producto_en_proceso = true;
 
-      this.oauth.createProducto(this.producto).subscribe(
+      this.oauth.createEvento(this.evento).subscribe(
         (createdProduct) => {
           console.log('Product created:', createdProduct);
           this.producto_en_proceso = false;
@@ -86,8 +78,7 @@ export class CrearProductoComponent {
           this.error_general = true;
         }
       );
-    }
-    this.router.navigate(['/articulos']);
+    //this.router.navigate(['/eventos']);
   }
 
   onButtonVolverClick() : void {
@@ -108,11 +99,20 @@ export class CrearProductoComponent {
       this.oauth.uploadImage(this.selectedFiles).subscribe(response => {
         if (response) {
           this.urls = response.urls;
-          this.producto.imagenes = this.urls;
+          this.evento.imagenes = this.urls;
           this.fotos_subidas = true;
         }
       });
     }
+  }
+
+  signOut(): void{
+    this.authService.signOut();
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    localStorage.removeItem("name");
+    localStorage.removeItem("photoUrl");
+    location.reload();
   }
 
 }

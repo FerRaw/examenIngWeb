@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   
-  loggedIn = false;
+  loggedIn = localStorage.getItem("token") != null;
   token : any;
 
   constructor(
@@ -24,7 +24,12 @@ export class NavbarComponent {
 
   redireccion() {
     console.log("redireccionando");
-    this.router.navigate(['/crearProducto']);
+    this.router.navigate(['/crearEvento']);
+  }
+
+  redireccion2() {
+    console.log("redireccionando");
+    this.router.navigate(['/updEvento']);
   }
 
   signOut(): void{
