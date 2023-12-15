@@ -1,20 +1,16 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
 
-import { InicioEmtComponent } from './features/inicio-emt/inicio-emt.component';
+const modules = [
+  CommonModule,
+  FormsModule,
+  ReactiveFormsModule,
+  // ... otros módulos
+];
 
 @NgModule({
-  declarations: [
-    InicioEmtComponent
-    // ... otros componentes, directivas, pipes
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule, // Asegúrate de incluir ReactiveFormsModule aquí
-    // ... otros módulos
-  ],
-  bootstrap: [InicioEmtComponent]
+  declarations: [],
+  imports: [...modules],
 })
 export class AppModule { }

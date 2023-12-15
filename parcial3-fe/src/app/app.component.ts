@@ -15,4 +15,12 @@ import { HttpClientModule } from '@angular/common/http';
 export class AppComponent {
   title = 'parcial3';
   loggedIn : any;
+  token = localStorage.getItem("token");
+
+  ngOnInit(): void {
+
+    if(this.token!=null && this.token!=undefined){
+      this.loggedIn = true;
+    }
+  }
 }

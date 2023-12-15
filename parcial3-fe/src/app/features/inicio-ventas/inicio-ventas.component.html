@@ -1,0 +1,35 @@
+<div class="container">
+    <form (ngSubmit)="filtroBusqueda()">
+        <input type="text" [(ngModel)]="busqueda" name="busqueda" placeholder="Buscar productos">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <div class="row">
+        <div class="col-lg-4 col-md-6" *ngFor="let product of productos; let i = index">
+            <div class="row">
+                <div class="col-12" >
+                    <div class="product zoom-on-hover d-flex flex-column">
+                        <img [src]="product.imagenes[0]" alt="Product Image">
+                        <h3 class="h3">Producto de: {{product.vendedor}}</h3>
+                        <div class="wrapper">
+                            <p>{{ product.descripcion }}</p>
+                        </div>
+                        <div class="flex-grow-1"></div>
+                        <div class="d-flex flex-column align-items-center">
+                            <div class="precio">
+                                <h4>
+                                    {{ product.precioSalida}}
+                                </h4>
+                            </div>
+                            <div class="mb-3">
+                                <button class="btn boton-pujar" (click)="redirectToProduct(product.identificador)">Pujar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
