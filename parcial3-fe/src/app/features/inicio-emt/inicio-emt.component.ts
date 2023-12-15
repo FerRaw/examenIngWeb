@@ -31,10 +31,11 @@ export class InicioEmtComponent {
 
   constructor(
       private servicioPpal: OauthService,
-        private http: HttpClient,
+      private http: HttpClient,
   ){}
 
   ngOnInit(): void {
+    console.log(localStorage.getItem("token"), localStorage.getItem("email"));
     this.servicioPpal.getLineas().subscribe((data: any[]) => {
       console.log(data);
       this.lineas = data;
@@ -93,6 +94,7 @@ export class InicioEmtComponent {
     // Limpia el array de marcadores
     this.markers = [];
   }
+
 
   anyadirMarcadores(data: any[]): void {
     for (let i = 0; i < data.length; i++) {

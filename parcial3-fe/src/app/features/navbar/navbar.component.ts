@@ -1,24 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { OauthComponent } from '../oauth/oauth.component';
+import { CommonModule } from '@angular/common';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Router } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [OauthComponent, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
-  providers: [HttpClient, HttpClientModule]
+  providers: [OauthComponent]
 })
 export class NavbarComponent {
+  
+  loggedIn = false;
+  token : any;
+
   constructor(
-    private router: Router,
+    private authService: SocialAuthService,
+     private router: Router
   ) {}
 
   redireccion() {
     console.log("redireccionando");
     this.router.navigate(['/crearProducto']);
+  }
+
+  signOut(): void{
+    this.authService.signOut();
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    localStorage.removeItem("name");
+    localStorage.removeItem("photoUrl");
+    location.reload();
   }
 
 }

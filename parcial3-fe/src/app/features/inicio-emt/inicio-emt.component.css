@@ -1,3 +1,9 @@
+.logout-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 body {
   font-family: Arial, sans-serif;
 }

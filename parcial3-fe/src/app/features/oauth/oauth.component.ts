@@ -20,13 +20,13 @@ export class OauthComponent{
 
   ngOnInit() {
     this.authService.authState.subscribe((user) => {
-      
+      console.log("entraaa");
       this.user = user;
       this.loggedIn = (user != null);
       if (user && user.idToken) {
         this.oauthService.verifyToken(user);
       }
-      this.router.navigate(['/articulos']);
+      this.router.navigate(['/inicioEmt']);
     });
   }
 

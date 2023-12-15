@@ -20,6 +20,7 @@ export class OauthService {
     // Send a POST request to the backend with the idToken
     this.http.post(backendUrl, { idtoken: user.idToken }).subscribe(
       (response) => {
+        console.log(response)
         console.log('Token verification success:', response);
         localStorage.setItem("token", user.idToken);
         localStorage.setItem("email", user.email);
@@ -35,43 +36,43 @@ export class OauthService {
   }
 
   getLineas(): Observable<any> {
-    return this.http.get('http://172.31.26.175:8000/lineas/');
+    return this.http.get('http://localhost:8000/lineas/');
     //return this.http.get<any>(url);
   }
 
   getForm1(codLinea: string, sentido: string): Observable<any> {
-    const url = `http://172.31.26.175:8000/lineas/${codLinea}/${sentido}/`;
+    const url = `http://localhost:8000/lineas/${codLinea}/${sentido}/`;
     console.log(this.http.get<any>(url));
     return this.http.get<any>(url);
   }
 
   getForm2(parada: string): Observable<any> {
-    const url = `http://172.31.26.175:8000/paradas/${parada}/`;
+    const url = `http://localhost:8000/paradas/${parada}/`;
     console.log(this.http.get<any>(url));
     return this.http.get<any>(url);
   }
 
   getProductos(): Observable<any> {
-    return this.http.get('http://172.31.26.175:8000/articulos/');
+    return this.http.get('http://localhost:8000/articulos/');
   }
 
   getProducto(id: string): Observable<any> {
-    const url = `http://172.31.26.175:8000/articulo/${id}/`;
+    const url = `http://localhost:8000/articulo/${id}/`;
     return this.http.get<any>(url);
   }
 
   getUltimaPuja(id: string): Observable<any> {
-    const url = `http://172.31.26.175:8000/pujas/last/${id}/`;
+    const url = `http://localhost:8000/pujas/last/${id}/`;
     return this.http.get<any>(url);
   }
 
   getPujas(id: string): Observable<any> {
-    const url = `http://172.31.26.175:8000/pujas/producto/${id}/`;
+    const url = `http://localhost:8000/pujas/producto/${id}/`;
     return this.http.get<any>(url);
   }
 
   crearPuja(puja: any): Observable<any> {
-    const url = `http://172.31.26.175:8000/pujas/create/`;
+    const url = `http://localhost/pujas/create/`;
     return this.http.post<any>(url, puja);
   }
 
@@ -87,7 +88,7 @@ export class OauthService {
       formData.append('images', files[i]);
     }
 
-    return this.http.post<any>('http://172.31.26.175:8000/image/upload', formData);
+    return this.http.post<any>('http://localhost:8000/image/upload', formData);
   
   }
   

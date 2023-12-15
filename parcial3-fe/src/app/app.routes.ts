@@ -13,16 +13,12 @@ export const routes: Routes = [
         component: OauthComponent,
         title: 'Iniciar sesión'
     },
-    {
-        path: 'inicio',
-        component: InicioComponent,
-        title: 'Inicio'
-    },
-    {
+    
+    /*{
         path: 'map',
         component: MapComponent,
         title: 'Mapa'
-    },
+    },*/
     {
         path: 'inicioEmt',
         component: InicioEmtComponent,
